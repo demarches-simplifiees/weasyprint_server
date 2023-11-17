@@ -8,3 +8,5 @@ apt install python3-flask weasyprint
 
 ## Lancement
 flask run --host=0.0.0.0
+
+nouvelle installation avec pango
