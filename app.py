@@ -1,7 +1,14 @@
 import os
 import sys
+import logging
 from flask import Flask, request, make_response
 from weasyprint import HTML
+
+LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), 'log')
+LOG_FILE = os.path.join(LOG_PATH, 'weasyprint.log')
+
+logger = logging.getLogger('weasyprint')
+logger.addHandler(logging.FileHandler(LOG_FILE))
 
 try:  
    BASE_URL = os.environ['BASE_URL']
