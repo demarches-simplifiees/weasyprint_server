@@ -3,6 +3,7 @@ import sys
 import logging
 from flask import Flask, request, make_response
 from weasyprint import HTML
+from custom_fetcher import custom_url_fetcher
 
 LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
 LOG_FILE = os.path.join(LOG_PATH, "weasyprint.log")
@@ -23,8 +24,12 @@ app = Flask(__name__)
 def pdf():
     request_data = request.get_json()
     string_html = request_data["html"]
-    html = HTML(string=string_html, base_url=BASE_URL)
-    pdf = html.write_pdf()
+    html = HTML(string=string_html, base_url=BASE_URL, url_fetcher=custom_url_fetcher)
+    try:
+        pdf = html.write_pdf()
+    # See the hack in custom_fetcher.py
+    except AttributeError as e:
+        return str(e), 500
     response = make_response(pdf)
     response.headers["Content-Type"] = "application/pdf"
     response.headers["Content-Disposition"] = "inline;filename=fichier"
