@@ -19,3 +19,6 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pipenv run pylint $(git ls-files '*.py')
+    - name: Analysing the style with black
+      run: |
+        pipenv run black .
