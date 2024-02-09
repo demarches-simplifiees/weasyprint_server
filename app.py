@@ -6,6 +6,7 @@ from weasyprint import HTML
 from custom_fetcher import custom_url_fetcher
 
 LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
+os.makedirs(LOG_PATH, exist_ok=True)
 LOG_FILE = os.path.join(LOG_PATH, "weasyprint.log")
 
 logger = logging.getLogger("weasyprint")
