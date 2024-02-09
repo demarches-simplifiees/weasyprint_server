@@ -67,3 +67,5 @@ class TestIntegrations(TestCase):
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.headers["Content-Type"], "application/json")
+        self.assertEqual(response.get_json(), {"error": "an asset is missing"})

@@ -36,8 +36,9 @@ def create_app(test_config=None):
         try:
             generated_pdf = html.write_pdf()
         # See the hack in custom_fetcher.py
-        except AttributeError as e:
-            return str(e), 500
+        except AttributeError:
+            response = make_response({"error": "an asset is missing"}, 500)
+            return response
 
         response = make_response(generated_pdf)
         response.headers["Content-Type"] = "application/pdf"
