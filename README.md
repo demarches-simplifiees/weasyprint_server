@@ -35,7 +35,7 @@ Eventuellement rajouter `-p 5001` si le port 5000 est déjà utilisé (ce qui es
 ### uwsgi
 
 ```bash
-BASE_URL='http://127.0.0.1:3000' uwsgi --socket 0.0.0.0:5000 --protocol=http -w app:app
+BASE_URL='http://127.0.0.1:3000' uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
 ```
 
 un exemple de fichier de configuration pour uWSGI :
@@ -49,7 +49,7 @@ uid = weasyprint
 gid = weasyprint
 chdir = /home/weasyprint/weasyprint/
 env = BASE_URL=https://root_of_your_statics
-wsgi-file = app.py
+wsgi-file = wsgi.py
 callable = app
 processes = 4
 stats = server_ip:9191
