@@ -34,6 +34,10 @@ Eventuellement rajouter `-p 5001` si le port 5000 est déjà utilisé (ce qui es
 
 ### uwsgi
 
+```bash
+BASE_URL='http://127.0.0.1:3000' uwsgi --socket 0.0.0.0:5000 --protocol=http -w app:app
+```
+
 un exemple de fichier de configuration pour uWSGI :
 
 ```INI
