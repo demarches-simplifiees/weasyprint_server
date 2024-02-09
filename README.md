@@ -13,6 +13,7 @@ pip install pipenv
 PIPENV_VENV_IN_PROJECT=true pipenv install
 ```
 
+Install apt :
 ```bash
 apt install python3-flask weasyprint
 ```
@@ -21,7 +22,7 @@ apt install python3-flask weasyprint
 ### en local
 
 ```bash
-flask run --host=0.0.0.0 -H ${CWD}/.venv # par défaut sur port 5000`
+flask run --host=0.0.0.0 -h ${CWD}/.venv # par défaut sur port 5000`
 ```
 
 Une variable d'environnement `BASE_URL` doit pointer vers le serveur qui contient les assets,
