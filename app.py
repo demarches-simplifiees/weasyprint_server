@@ -8,8 +8,13 @@ from custom_fetcher import custom_url_fetcher
 LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
 LOG_FILE = os.path.join(LOG_PATH, "weasyprint.log")
 
+logging.basicConfig()
 logger = logging.getLogger("weasyprint")
 logger.addHandler(logging.FileHandler(LOG_FILE))
+fh = logging.FileHandler(LOG_FILE)
+FORMAT = "%(asctime)s %(message)s"
+fh.setFormatter(logging.Formatter(FORMAT))
+logger.addHandler(fh)
 
 try:
     BASE_URL = os.environ["BASE_URL"]
