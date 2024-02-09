@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 weasyprint = "*"
 flask = "*"
+uwsgi = "*"
 
 [dev-packages]
 pylint = "*"
