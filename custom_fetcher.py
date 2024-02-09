@@ -1,5 +1,5 @@
-from weasyprint.urls import default_url_fetcher
 from urllib.error import URLError
+from weasyprint.urls import default_url_fetcher
 
 
 def custom_url_fetcher(url, timeout=10, ssl_context=None):
