@@ -26,11 +26,11 @@ def pdf():
     string_html = request_data["html"]
     html = HTML(string=string_html, base_url=BASE_URL, url_fetcher=custom_url_fetcher)
     try:
-        pdf = html.write_pdf()
+        generated_pdf = html.write_pdf()
     # See the hack in custom_fetcher.py
     except AttributeError as e:
         return str(e), 500
-    response = make_response(pdf)
+    response = make_response(generated_pdf)
     response.headers["Content-Type"] = "application/pdf"
     response.headers["Content-Disposition"] = "inline;filename=fichier"
     return response
