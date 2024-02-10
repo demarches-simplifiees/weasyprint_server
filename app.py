@@ -38,12 +38,18 @@ def create_app(test_config=None):
             generated_pdf = html.write_pdf()
         # See the hack in custom_fetcher.py
         except AttributeError:
-            response = make_response({"error": "an asset is missing"}, 500)
-            return response
+            return make_response({"error": "an asset is missing"}, 500)
 
         response = make_response(generated_pdf)
         response.headers["Content-Type"] = "application/pdf"
         response.headers["Content-Disposition"] = "inline;filename=fichier"
         return response
+
+    @app.route("/ping", methods=["GET"])
+    def ping():
+        if os.path.isfile("maintenance"):
+            return make_response({}, 404)
+
+        return make_response({}, 200)
 
     return app
