@@ -2,43 +2,61 @@
 
 ## But
 
-Fournir un webservice qui converti un document html en pdf.
+Convertir des documents html en pdf.
 
-## Installation
-### with pipenv (recommended)
+## Développement
+### installation
 
-Install pipenv :
+On utilise les outils [pyenv](https://github.com/pyenv/pyenv) et [pipenv](https://pipenv.pypa.io/en/latest/) pour gérer les dépendances.
+
 ```bash
+# installation de la version de python definit dans .python-version
+pyenv install
+
 pip install pipenv
-PIPENV_VENV_IN_PROJECT=true pipenv install
+
+# installation des deps
+pipenv install --dev
 ```
 
-Install apt :
-```bash
-apt install python3-flask weasyprint
-```
+### lancement de l'application
 
-## Lancement
-### en local
+1. Configurer vos variables d'environnement dans le fichier .env
 
 ```bash
-flask run --host=0.0.0.0 -h ${CWD}/.venv # par défaut sur port 5000`
+cp env.example .env
 ```
 
-Une variable d'environnement `BASE_URL` doit pointer vers le serveur qui contient les assets,
-par exemple `BASE_URL="http://localhost:3000"`
-
-ou éventuellement, en local, grâce au `Procfile.dev` avec votre process manager favori (overmind, …).
-
-Eventuellement rajouter `-p 5001` si le port 5000 est déjà utilisé (ce qui est le cas sous MacOS), ou avec la variable d'environnement `FLASK_RUN_PORT`.
-
-### uwsgi
+2. lancer l'appli
 
 ```bash
-BASE_URL='http://127.0.0.1:3000' uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+pipenv run flask run
+
+# or any process manager reading Procfile.dev
+overmind start
 ```
 
-un exemple de fichier de configuration pour uWSGI :
+### tests
+
+```bash
+pipenv run invoke test
+```
+
+### linters
+
+```bash
+pipenv run invoke lint
+```
+
+## Production
+
+On utilise le webserver [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/)
+
+```bash
+pipenv run uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+```
+
+Exemple de fichier de config :
 
 ```INI
 [uwsgi]
