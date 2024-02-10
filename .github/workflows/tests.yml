@@ -18,4 +18,4 @@ jobs:
         pipenv install --dev
     - name: tests
       run: |
-        pipenv run python -m unittest
+        pipenv run invoke test

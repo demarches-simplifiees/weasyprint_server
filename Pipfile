@@ -11,3 +11,4 @@ uwsgi = "*"
 [dev-packages]
 pylint = "*"
 black = "*"
+invoke = "*"

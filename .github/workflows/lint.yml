@@ -16,9 +16,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
-    - name: Analysing the code with pylint
+    - name: running linter
       run: |
-        pipenv run pylint $(git ls-files '*.py')
-    - name: Analysing the style with black
-      run: |
-        pipenv run black .
+        pipenv run invoke lint
