@@ -1,0 +1,41 @@
+[project]
+name = "weasyprint_server"
+version = "0.0.1"
+description = "html to pdf server"
+readme = "README.md"
+
+dependencies = [
+  "weasyprint",
+  "flask",
+  "sentry-sdk",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pylint",
+  "black",
+  "invoke",
+]
+
+[tool.poetry]
+name = "weasyprint-server"
+version = "0.1.0"
+description = "convert html to pdf"
+authors = ["ds team"]
+license = "AGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+weasyprint = "^61.0"
+Flask = "^3.0.2"
+sentry-sdk = "^1.40.4"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.0.3"
+black = "^24.2.0"
+invoke = "^2.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

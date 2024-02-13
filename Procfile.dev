@@ -1,1 +1,1 @@
-worker: pipenv run flask run
+worker: poetry run flask run
