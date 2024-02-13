@@ -3,6 +3,7 @@ import sys
 import logging
 from flask import Flask, request, make_response
 from weasyprint import HTML
+import sentry_sdk
 from custom_fetcher import custom_url_fetcher
 
 LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
@@ -11,6 +12,21 @@ LOG_FILE = os.path.join(LOG_PATH, "weasyprint.log")
 
 logger = logging.getLogger("weasyprint")
 logger.addHandler(logging.FileHandler(LOG_FILE))
+
+
+def before_send(event, _hint):
+    # Redact the request data to avoid sending sensitive information
+    if "request" in event and "data" in event["request"]:
+        event["request"]["data"] = "REDACTED"
+    return event
+
+
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    enable_tracing=True,
+    traces_sample_rate=1.0,
+    before_send=before_send,
+)
 
 
 def create_app(test_config=None):
@@ -38,6 +54,7 @@ def create_app(test_config=None):
             generated_pdf = html.write_pdf()
         # See the hack in custom_fetcher.py
         except AttributeError:
+            sentry_sdk.capture_message("An asset is missing")
             return make_response({"error": "an asset is missing"}, 500)
 
         response = make_response(generated_pdf)
