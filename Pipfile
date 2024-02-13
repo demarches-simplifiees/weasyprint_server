@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 weasyprint = "*"
 flask = "*"
-uwsgi = "*"
 sentry-sdk = {extras = ["flask"], version = "*"}
 
 [dev-packages]
