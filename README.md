@@ -7,16 +7,16 @@ Convertir des documents html en pdf.
 ## Développement
 ### installation
 
-On utilise les outils [pyenv](https://github.com/pyenv/pyenv) et [pipenv](https://pipenv.pypa.io/en/latest/) pour gérer les dépendances.
+On utilise les outils [pyenv](https://github.com/pyenv/pyenv) et [poetry](https://python-poetry.org) pour gérer les dépendances.
 
 ```bash
 # installation de la version de python definit dans .python-version
 pyenv install
 
-pip install pipenv
+pip install poetry
 
 # installation des deps
-pipenv install --dev
+poetry install
 ```
 
 ### lancement de l'application
@@ -30,7 +30,7 @@ cp env.example .env
 2. lancer l'appli
 
 ```bash
-pipenv run flask run
+poetry run flask run
 
 # or any process manager reading Procfile.dev
 overmind start
@@ -39,22 +39,18 @@ overmind start
 ### tests
 
 ```bash
-pipenv run invoke test
+poetry run invoke test
 ```
 
 ### linters
 
 ```bash
-pipenv run invoke lint
+poetry run invoke lint
 ```
 
 ## Production
 
 On utilise le webserver [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/)
-
-```bash
-pipenv run uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
-```
 
 Exemple de fichier de config :
 
@@ -66,7 +62,7 @@ http-socket = server_ip:3000
 uid = weasyprint
 gid = weasyprint
 chdir = /home/weasyprint/weasyprint/
-env = BASE_URL=https://root_of_your_statics
+env = ... # see env.example
 wsgi-file = wsgi.py
 callable = app
 processes = 4
