@@ -36,6 +36,7 @@ python-dotenv = "^1.0.1"
 pylint = "^3.0.3"
 black = "^24.2.0"
 invoke = "^2.2.0"
+ruff = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]
