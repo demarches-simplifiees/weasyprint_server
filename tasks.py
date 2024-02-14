@@ -2,18 +2,18 @@ from invoke import task
 
 
 @task
-def black(c):
+def ruff_format(c):
     print("running black...")
-    c.run("black --check .")
+    c.run("ruff format --check .")
 
 
 @task
-def pylint(c):
+def ruff_lint(c):
     print("running pylint...")
-    c.run("pylint *.py")
+    c.run("ruff check")
 
 
-@task(pre=[black, pylint])
+@task(pre=[ruff_format, ruff_lint])
 def lint(_c):
     print("Linting ... done!")
 
