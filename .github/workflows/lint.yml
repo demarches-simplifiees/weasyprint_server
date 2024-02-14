@@ -14,8 +14,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pipenv
-        pipenv install --dev
+        pip install poetry
+        poetry install
     - name: running linter
       run: |
-        pipenv run invoke lint
+        poetry run invoke lint

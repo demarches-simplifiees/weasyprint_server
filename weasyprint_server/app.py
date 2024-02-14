@@ -4,7 +4,7 @@ import logging
 from flask import Flask, request, make_response
 from weasyprint import HTML
 import sentry_sdk
-from custom_fetcher import custom_url_fetcher
+from weasyprint_server.custom_fetcher import custom_url_fetcher
 
 LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
 os.makedirs(LOG_PATH, exist_ok=True)

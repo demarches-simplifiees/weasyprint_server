@@ -1,6 +1,6 @@
 from unittest import TestCase
 from pathlib import Path
-from app import create_app
+from weasyprint_server.app import create_app
 
 PORT = 8000
 

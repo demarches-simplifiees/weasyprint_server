@@ -21,4 +21,4 @@ def lint(_c):
 @task
 def test(c):
     print("running tests...")
-    c.run("python -m unittest")
+    c.run("python -m unittest discover")
