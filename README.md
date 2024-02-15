@@ -48,7 +48,36 @@ poetry run invoke test
 poetry run invoke lint
 ```
 
+## Packaging
+
+>[!NOTE]
+> La version de python sur la machine de packaging et la machine cible doit être la même.
+
+```
+git clone https://github.com/demarches-simplifiees/weasyprint_server.git
+cd weasyprint_server
+pip install poetry
+poetry self add poetry-plugin-export
+bash simple_package.sh
+```
+
+l'application avec ces dépendances est dans `dist.tar.gz`
+
 ## Production
+
+### deploiement
+
+```
+cp dist.tar.gz good_directory && cd good_directory
+tar -xvf dist.tar.gz
+python -m venv .venv
+. .venv/bin/activate
+pip install --no-index --find-links=deps -r requirements.txt
+# si on veut vérifier l'installation
+flask run
+```
+
+### webserver
 
 On utilise le webserver [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/)
 
