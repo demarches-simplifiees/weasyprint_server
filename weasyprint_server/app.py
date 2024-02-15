@@ -58,7 +58,6 @@ def create_app(test_config=None):
         # See the hack in custom_fetcher.py
         except AttributeError:
             sentry_sdk.capture_message("An asset is missing")
-            LOGGER.warn("An asset is missing")
             return make_response({"error": "an asset is missing"}, 500)
 
         response = make_response(generated_pdf)
