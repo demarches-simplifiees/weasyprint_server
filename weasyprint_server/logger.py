@@ -32,4 +32,5 @@ handler = logging.FileHandler(LOG_FILE)
 handler.setFormatter(JsonFormatter())
 LOGGER.addHandler(handler)
 
-LOGGER.setLevel(logging.INFO)
+LOGLEVEL = os.environ.get("LOG_LEVEL", "WARNING").upper()
+LOGGER.setLevel(LOGLEVEL)
