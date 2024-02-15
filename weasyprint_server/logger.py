@@ -19,7 +19,7 @@ class JsonFormatter(logging.Formatter):
         }
 
         if "exc_info" in record.__dict__ and record.exc_info is not None:
-            log_record["exc_info"] = self.formatException(record.exc_info)
+            log_record["exc"] = str(record.exc_info)
 
         if "context" in record.__dict__:
             log_record.update(record.__dict__["context"])
