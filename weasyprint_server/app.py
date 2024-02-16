@@ -18,12 +18,13 @@ def before_send(event, _hint):
     return event
 
 
-sentry_sdk.init(
-    dsn=os.environ.get("SENTRY_DSN"),
-    enable_tracing=True,
-    traces_sample_rate=1.0,
-    before_send=before_send,
-)
+if os.environ.get("SENTRY_DSN"):
+    sentry_sdk.init(
+        dsn=os.environ.get("SENTRY_DSN"),
+        enable_tracing=True,
+        traces_sample_rate=1.0,
+        before_send=before_send,
+    )
 
 
 def create_app(test_config=None):
