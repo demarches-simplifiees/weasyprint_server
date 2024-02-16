@@ -5,7 +5,10 @@ from werkzeug.exceptions import HTTPException
 from weasyprint import HTML
 import sentry_sdk
 from weasyprint_server.custom_fetcher import custom_url_fetcher
-from .logger import LOGGER
+from .logger import LOGGER, ACCESS_LOGGER
+import time
+import json
+import datetime
 
 
 def before_send(event, _hint):
@@ -71,5 +74,27 @@ def create_app(test_config=None):
             return make_response({}, 404)
 
         return make_response({}, 200)
+
+    @app.before_request
+    def before_request():
+        request.start_time = time.perf_counter()
+
+    @app.after_request
+    def after_request(response):
+        now = datetime.datetime.now().isoformat()
+        to_log = {"time": now, "code": response.status_code}
+
+        if hasattr(request, "start_time"):
+            to_log["duration"] = int((time.perf_counter() - request.start_time) * 1000)
+
+        if request.content_type == "application/json":
+            request_data = request.get_json()
+            to_log["upstream_context"] = request_data.get("upstream_context")
+            to_log["request_id"] = request_data.get("request_id")
+
+        to_log = {k: v for k, v in to_log.items() if v is not None}
+
+        ACCESS_LOGGER.info(json.dumps(to_log))
+        return response
 
     return app

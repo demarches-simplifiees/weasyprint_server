@@ -1,15 +1,13 @@
-import os
-import logging
+from os import environ
+from logging import getLogger, FileHandler, Formatter
 import json
 from pathlib import Path
 
-LOG_DIR = Path(os.environ.get("LOG_DIR", "~/weasyprint_log")).expanduser()
-os.makedirs(LOG_DIR, exist_ok=True)
-
-LOG_FILE = LOG_DIR / "weasyprint.log"
+LOG_DIR = Path(environ.get("LOG_DIR", "~/weasyprint_log")).expanduser()
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 
-class JsonFormatter(logging.Formatter):
+class JsonFormatter(Formatter):
     def format(self, record):
         log_record = {
             "time": self.formatTime(record),
@@ -29,10 +27,12 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(log_record)
 
 
-LOGGER = logging.getLogger("weasyprint_server")
-handler = logging.FileHandler(LOG_FILE)
+LOGGER = getLogger("error")
+handler = FileHandler(LOG_DIR / "error.log")
 handler.setFormatter(JsonFormatter())
 LOGGER.addHandler(handler)
+LOGGER.setLevel(environ.get("ERROR_LOG_LEVEL", "WARNING").upper())
 
-LOGLEVEL = os.environ.get("LOG_LEVEL", "WARNING").upper()
-LOGGER.setLevel(LOGLEVEL)
+ACCESS_LOGGER = getLogger("access")
+ACCESS_LOGGER.addHandler(FileHandler(LOG_DIR / "access.log"))
+ACCESS_LOGGER.setLevel(environ.get("ACCESS_LOG_LEVEL", "INFO").upper())
