@@ -4,7 +4,7 @@ from flask import Flask, request, make_response
 from werkzeug.exceptions import HTTPException
 from weasyprint import HTML
 import sentry_sdk
-from weasyprint_server.custom_fetcher import custom_url_fetcher
+from .custom_fetcher import custom_url_fetcher
 from .logger import ERROR_LOGGER, ACCESS_LOGGER
 import time
 import json
