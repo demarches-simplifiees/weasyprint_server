@@ -1,10 +1,12 @@
 import os
 import logging
 import json
+from pathlib import Path
 
-LOG_PATH = os.path.join(os.path.abspath(os.getcwd()), "log")
-os.makedirs(LOG_PATH, exist_ok=True)
-LOG_FILE = os.path.join(LOG_PATH, "weasyprint.log")
+LOG_DIR = Path(os.environ.get("LOG_DIR", "~/weasyprint_log")).expanduser()
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOG_FILE = LOG_DIR / "weasyprint.log"
 
 
 class JsonFormatter(logging.Formatter):
