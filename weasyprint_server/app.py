@@ -5,7 +5,7 @@ from werkzeug.exceptions import HTTPException
 from weasyprint import HTML
 import sentry_sdk
 from weasyprint_server.custom_fetcher import custom_url_fetcher
-from .logger import LOGGER, ACCESS_LOGGER
+from .logger import ERROR_LOGGER, ACCESS_LOGGER
 import time
 import json
 import datetime
@@ -41,7 +41,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(Exception)
     def handle_exception(e):
-        LOGGER.error("An error occurred", exc_info=e)
+        ERROR_LOGGER.error("An error occurred", exc_info=e)
 
         if isinstance(e, HTTPException):
             return e

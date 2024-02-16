@@ -27,11 +27,11 @@ class JsonFormatter(Formatter):
         return json.dumps(log_record)
 
 
-LOGGER = getLogger("error")
+ERROR_LOGGER = getLogger("error")
 handler = FileHandler(LOG_DIR / "error.log")
 handler.setFormatter(JsonFormatter())
-LOGGER.addHandler(handler)
-LOGGER.setLevel(environ.get("ERROR_LOG_LEVEL", "WARNING").upper())
+ERROR_LOGGER.addHandler(handler)
+ERROR_LOGGER.setLevel(environ.get("ERROR_LOG_LEVEL", "WARNING").upper())
 
 ACCESS_LOGGER = getLogger("access")
 ACCESS_LOGGER.addHandler(FileHandler(LOG_DIR / "access.log"))
