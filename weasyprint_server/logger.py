@@ -2,6 +2,7 @@ from os import environ
 from logging import getLogger, FileHandler, Formatter
 import json
 from pathlib import Path
+import datetime
 
 LOG_DIR = Path(environ.get("LOG_DIR", "~/weasyprint_log")).expanduser()
 LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -9,8 +10,10 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 class JsonFormatter(Formatter):
     def format(self, record):
+        now = datetime.datetime.now().isoformat()
+
         log_record = {
-            "time": self.formatTime(record),
+            "time": now,
             "level": record.levelname,
             "name": record.name,
             "msg": record.getMessage(),
