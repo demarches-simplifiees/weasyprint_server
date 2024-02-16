@@ -30,7 +30,7 @@ cp env.example .env
 2. lancer l'appli
 
 ```bash
-poetry run flask run
+poetry run flask run --debug
 
 # or any process manager reading Procfile.dev
 overmind start
@@ -53,7 +53,7 @@ poetry run invoke lint
 >[!NOTE]
 > La version de python sur la machine de packaging et la machine cible doit être la même.
 
-```
+```bash
 git clone https://github.com/demarches-simplifiees/weasyprint_server.git
 cd weasyprint_server
 pip install poetry
@@ -67,7 +67,7 @@ l'application avec ces dépendances est dans `dist.tar.gz`
 
 ### deploiement
 
-```
+```bash
 cp dist.tar.gz good_directory && cd good_directory
 tar -xvf dist.tar.gz
 python -m venv .venv
