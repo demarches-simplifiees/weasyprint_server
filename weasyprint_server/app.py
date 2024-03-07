@@ -91,7 +91,9 @@ def create_app(test_config=None):
         if request.content_type == "application/json":
             request_data = request.get_json()
             to_log["upstream_context"] = request_data.get("upstream_context")
-            to_log["request_id"] = request_data.get("request_id")
+
+        if request.headers.get("X-Request-Id"):
+            to_log["request_id"] = request.headers.get("X-Request-Id")
 
         to_log = {k: v for k, v in to_log.items() if v is not None}
 
