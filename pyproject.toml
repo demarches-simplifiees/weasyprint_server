@@ -9,6 +9,7 @@ dependencies = [
   "weasyprint",
   "flask",
   "sentry-sdk",
+  "pyuwsgi",
 ]
 
 [tool.uv]
