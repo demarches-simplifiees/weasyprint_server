@@ -1,0 +1,26 @@
+#! /bin/bash
+
+set -e
+
+is_systemd_running() {
+    pidof systemd >/dev/null 2>&1
+}
+
+case "$1" in
+ upgrade)
+ ;;
+
+
+ purge)
+
+ rm -rf /opt/weasyprint /lib/systemd/system/weasyprint.service /etc/opt/weasyprint.ini
+
+ if is_systemd_running; then
+     systemctl daemon-reload
+ fi
+
+ # remove ds user
+ userdel -r weasyprint
+ ;;
+esac
+exit 0

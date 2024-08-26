@@ -1,0 +1,6 @@
+FROM ubuntu:focal
+
+USER root
+
+RUN apt-get update \
+    && apt-get install -yqq pango1.0-tools curl
