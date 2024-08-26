@@ -1,0 +1,18 @@
+[Unit]
+Description=uWSGI weasyprint
+After=syslog.target
+
+[Service]
+User=weasyprint
+ExecStart=/opt/weasyprint/app/.venv/bin/uwsgi --ini /etc/opt/ds/weasyprint.ini
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+Restart=always
+Type=notify
+NotifyAccess=all
+StandardError=syslog
+
+Environment="BASE_URL=http://replace_me.com"
+
+[Install]
+WantedBy=multi-user.target

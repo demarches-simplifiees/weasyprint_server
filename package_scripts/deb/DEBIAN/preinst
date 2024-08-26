@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -e
+
+case "$1" in
+ install)
+ useradd -m weasyprint
+ ;;
+ abort-upgrade)
+ ;;
+ upgrade)
+
+ ;;
+ *)
+ echo "preinst called with unknown argument \`$1'" >&2
+ exit 1
+ ;;
+esac
+exit 0

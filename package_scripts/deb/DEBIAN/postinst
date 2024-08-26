@@ -1,0 +1,54 @@
+#! /bin/bash
+
+set -e
+
+is_systemd_running() {
+    pidof systemd >/dev/null 2>&1
+}
+
+case "$1" in
+  configure)
+
+    # it's a first install
+    if [ -z "$2" ] ; then
+
+      # reenable service start at install
+      [ -f /usr/sbin/policy-rc.d ] && rm /usr/sbin/policy-rc.d
+
+      # install weasyprint service
+      cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
+      chown root:root /lib/systemd/system/weasyprint.service
+
+      # install weasypint config
+      mkdir -p /etc/opt/ds
+      cp opt/weasyprint/default_conf/etc/opt/weasyprint.ini /etc/opt/ds/weasyprint.ini
+      chown root:root /etc/opt/ds/weasyprint.ini
+
+      # reload only if not in a container
+      if is_systemd_running; then
+        systemctl daemon-reload
+      fi
+
+    else
+      # upgrade
+      echo "upgrade [post inst]"
+
+      cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
+      chown root:root /lib/systemd/system/weasyprint.service
+
+      if is_systemd_running; then
+        systemctl daemon-reload
+        systemctl restart weasyprint
+      fi
+
+    fi
+
+    ;;
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+exit 0
+
+
