@@ -282,22 +282,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pyuwsgi"
-version = "2.0.26"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/cc/ba/e2dad8002b79605c8bcccd2e75f6ea7e3e0b6edfcb212b05fcc021271714/pyuwsgi-2.0.26.tar.gz", hash = "sha256:c7f167545939764a1c6fcd0f861023f641ca09f9806f1f4b7e48b9ea2682db8e", size = 854379 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c9/79/fda7c51731f2f34fb2b7629342a25ad05efb8e7d610c5a2c87fe88743d25/pyuwsgi-2.0.26-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:01aac38118cd35adb141a7ddbd721845c3b895a18d6cfddca3a237e0da5e5fc7", size = 663336 },
-    { url = "https://files.pythonhosted.org/packages/d6/15/bb0947c2b82e7802a3539e22a3466214c29caaf1bbf21ce3106c20ec8b38/pyuwsgi-2.0.26-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:ead0863e90397be562ca9816b2e0704f8e59e734ab158eb467db333814af704e", size = 589239 },
-    { url = "https://files.pythonhosted.org/packages/33/13/d2631731d19951aee32780525c6f948addf075bccd010db408cb66245549/pyuwsgi-2.0.26-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:cf4e2828ca8c213f91673ff960a29ebbc037d743e57b2758ea5a76dd13c0b01c", size = 881136 },
-    { url = "https://files.pythonhosted.org/packages/8d/5a/37729728d5c02476dcfb68004b6929c24eb4bc59556cb3291a5307a9e0b6/pyuwsgi-2.0.26-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:d48accc82c82d637be27ebb153c17a2773758df582602d7f8c1702e9dcf8ea3a", size = 940125 },
-    { url = "https://files.pythonhosted.org/packages/af/2c/bd4b67412464fe5cc539fb6b5ce019151479dbc7d9096eee8c5fcef4f3ed/pyuwsgi-2.0.26-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c87bd20906bceebf0bfb3fc4f25b12ca3943aafeaf0dc289df9144d4ee41f9c5", size = 889253 },
-    { url = "https://files.pythonhosted.org/packages/cb/48/fc3b13c3ba78e8d5f602d7fe94226c74c2c5a30123f1b70df28ed7aac3a1/pyuwsgi-2.0.26-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:e5f14b676f8aacd79a2106695657c212b4469cd98f1624dc0473e1e0e695bcc9", size = 861607 },
-    { url = "https://files.pythonhosted.org/packages/f3/41/748f466d64cdce35a33a8af6ad9ccf07475504068a9b0c71ffd38892e598/pyuwsgi-2.0.26-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:70aec45ba640742df86e0f1a0baa01964b162d11f24ee70d56146bd6331462f9", size = 932974 },
-    { url = "https://files.pythonhosted.org/packages/bc/4b/fdbda6b52f33939dddba1cb358a62bb47005b2b27e6bdc267c61cf3329d2/pyuwsgi-2.0.26-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:c8ded279e1c4da7273f25d658979071520ae97712650f70ea50715618cb51910", size = 870723 },
-]
-
-[[package]]
 name = "ruff"
 version = "0.6.2"
 source = { registry = "https://pypi.org/simple" }
@@ -390,7 +374,6 @@ version = "0.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "flask" },
-    { name = "pyuwsgi" },
     { name = "sentry-sdk" },
     { name = "weasyprint" },
 ]
@@ -404,7 +387,6 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "flask" },
-    { name = "pyuwsgi" },
     { name = "sentry-sdk" },
     { name = "weasyprint" },
 ]
