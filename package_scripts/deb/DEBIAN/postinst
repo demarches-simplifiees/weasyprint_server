@@ -17,12 +17,10 @@ case "$1" in
 
       # install weasyprint service
       cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
-      chown root:root /lib/systemd/system/weasyprint.service
 
       # install weasypint config
       mkdir -p /etc/opt/weasyprint
       cp opt/weasyprint/default_conf/etc/opt/weasyprint.ini /etc/opt/weasyprint/weasyprint.ini
-      chown root:root /etc/opt/weasyprint/weasyprint.ini
 
       # setup log dir
       mkdir -p /var/log/weasyprint
@@ -38,7 +36,6 @@ case "$1" in
       echo "upgrade [post inst]"
 
       cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
-      chown root:root /lib/systemd/system/weasyprint.service
 
       if is_systemd_running; then
         systemctl daemon-reload
