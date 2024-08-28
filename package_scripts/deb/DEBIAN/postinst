@@ -18,10 +18,6 @@ case "$1" in
       # install weasyprint service
       cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
 
-      # install weasypint config
-      mkdir -p /etc/opt/weasyprint
-      cp opt/weasyprint/default_conf/etc/opt/weasyprint.ini /etc/opt/weasyprint/weasyprint.ini
-
       # setup log dir
       mkdir -p /var/log/weasyprint
       chown weasyprint:weasyprint /var/log/weasyprint
