@@ -7,10 +7,10 @@ Convertir des documents html en pdf.
 ## Développement
 ### installation
 
-On utilise les outils [pyenv](https://github.com/pyenv/pyenv) et [poetry](https://python-poetry.org) pour gérer les dépendances.
+On utilise [uv](https://github.com/astral-sh/uv) pour gérer python et ces dépendances.
 
 ```bash
-# installation de la version de python definit dans .python-version
+# installation du project
 pyenv install
 
 pip install poetry

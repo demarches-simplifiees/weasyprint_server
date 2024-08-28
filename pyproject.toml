@@ -11,33 +11,7 @@ dependencies = [
   "pyuwsgi",
 ]
 
-[project.optional-dependencies]
-dev = [
-  "pylint",
-  "black",
-  "invoke",
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.2",
 ]
-
-[tool.poetry]
-name = "weasyprint-server"
-version = "0.1.0"
-description = "convert html to pdf"
-authors = ["ds team"]
-license = "AGPL-3.0"
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-weasyprint = "^62.0"
-Flask = "^3.0.2"
-sentry-sdk = "^2.8.0"
-python-dotenv = "^1.0.1"
-pyuwsgi = "^2.0.26"
-
-[tool.poetry.group.dev.dependencies]
-invoke = "^2.2.0"
-ruff = "^0.2.1"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"

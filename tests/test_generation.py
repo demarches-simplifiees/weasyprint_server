@@ -3,7 +3,7 @@ import http.server
 import socketserver
 import threading
 from unittest import TestCase
-from weasyprint_server.app import create_app
+from src.app import create_app
 
 
 PORT = 8000
