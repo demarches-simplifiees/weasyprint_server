@@ -4,13 +4,22 @@ After=syslog.target
 
 [Service]
 User=weasyprint
+
+WorkingDirectory=/opt/weasyprint/app
+
 ExecStart=/opt/weasyprint/app/.venv/bin/uwsgi
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStop=/bin/kill -INT $MAINPID
 Restart=always
+
 Type=notify
 NotifyAccess=all
 StandardError=syslog
+
+ProtectSystem=full
+ProtectHome=yes
+NoNewPrivileges=yes
+PrivateDevices=yes
 
 Environment="UWSGI_HTTP_SOCKET=127.0.0.1:8000"
 Environment="UWSGI_STATS=127.0.0.1:9191"
