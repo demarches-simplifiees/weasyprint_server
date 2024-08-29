@@ -1,0 +1,36 @@
+[Unit]
+Description=uWSGI weasyprint
+After=syslog.target
+
+[Service]
+User=weasyprint
+
+WorkingDirectory=/opt/weasyprint/app
+
+ExecStart=/opt/weasyprint/app/.venv/bin/uwsgi
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+Restart=always
+
+Type=notify
+NotifyAccess=all
+StandardError=syslog
+
+ProtectSystem=full
+ProtectHome=yes
+NoNewPrivileges=yes
+PrivateDevices=yes
+
+Environment="UWSGI_HTTP_SOCKET=127.0.0.1:8000"
+Environment="UWSGI_STATS=127.0.0.1:9191"
+Environment="UWSGI_PROCESSES=4"
+Environment="UWSGI_ENABLE_THREADS=true"
+Environment="UWSGI_CHDIR=/opt/weasyprint/app"
+Environment="UWSGI_MODULE=wsgi:app"
+Environment="LOG_DIR=/var/log/weasyprint"
+Environment="BASE_URL=http://change_me.com"
+
+EnvironmentFile=-/etc/opt/weasyprint.conf
+
+[Install]
+WantedBy=multi-user.target

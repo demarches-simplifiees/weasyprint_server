@@ -1,0 +1,30 @@
+#! /bin/bash
+
+set -e
+
+is_systemd_running() {
+    pidof systemd >/dev/null 2>&1
+}
+
+case "$1" in
+ remove)
+   if is_systemd_running; then
+     systemctl stop weasyprint.service || true
+     systemctl disable weasyprint.service
+   fi
+ ;;
+ upgrade)
+   if is_systemd_running; then
+     systemctl stop weasyprint.service || true
+   fi
+
+   # remove old systemd units
+   rm -f /lib/systemd/system/weasyprint.service
+
+   if is_systemd_running; then
+     systemctl daemon-reload
+   fi
+ ;;
+
+esac
+exit 0
