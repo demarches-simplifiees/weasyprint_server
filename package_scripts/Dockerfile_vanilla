@@ -3,4 +3,4 @@ FROM ubuntu:jammy
 USER root
 
 RUN apt-get update \
-    && apt-get install -yqq pango1.0-tools curl
+    && apt-get install -yqq pango1.0-tools logrotate curl

@@ -3,7 +3,7 @@ Architecture: amd64
 Essential: no
 Section: web
 Priority: optional
-Depends: pango1.0-tools
+Depends: pango1.0-tools, logrotate
 Maintainer: tech@demarches-simplifiees.fr
 Description: a flask wrapper around weasyprint
   This package contains a flask wrapper around weasyprint
