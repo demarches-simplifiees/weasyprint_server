@@ -82,6 +82,9 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(response):
+        if request.endpoint == "ping":
+            return response
+
         now = datetime.datetime.now().isoformat()
         to_log = {"time": now, "code": response.status_code}
 
