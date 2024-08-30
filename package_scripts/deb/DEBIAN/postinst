@@ -18,6 +18,9 @@ case "$1" in
       # install weasyprint service
       cp opt/weasyprint/default_conf/systemd/weasyprint.service /lib/systemd/system
 
+      # install logrotate conf
+      cp opt/weasyprint/default_conf/logrotate/weasyprint /etc/logrotate.d
+
       # setup log dir
       mkdir -p /var/log/weasyprint
       chown weasyprint:weasyprint /var/log/weasyprint
