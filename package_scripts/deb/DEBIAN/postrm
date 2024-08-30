@@ -13,7 +13,7 @@ case "$1" in
 
  purge)
 
- rm -rf /opt/weasyprint /lib/systemd/system/weasyprint.service
+ rm -rf /opt/weasyprint /lib/systemd/system/weasyprint.service /etc/logrotate.d/weasyprint
 
  if is_systemd_running; then
      systemctl daemon-reload
