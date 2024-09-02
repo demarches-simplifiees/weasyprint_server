@@ -95,6 +95,27 @@ def create_app(test_config=None):
             request_data = request.get_json()
             to_log["upstream_context"] = request_data.get("upstream_context")
 
+            if os.environ.get("DUMP_NON_REG_FIXTURES"):
+                fixtures_dir = "tests/fixtures"
+                procedure_id = request_data["upstream_context"]["procedure_id"]
+                html_file_path = os.path.join(
+                    fixtures_dir, f"procedure-{procedure_id}.html"
+                )
+                with open(html_file_path, "w") as html_file:
+                    html_file.write(request_data["html"])
+
+                pdf_file_path = os.path.join(
+                    fixtures_dir, f"procedure-{procedure_id}.pdf"
+                )
+                html = HTML(
+                    string=request_data["html"],
+                    base_url=app.config["BASE_URL"],
+                    url_fetcher=custom_url_fetcher,
+                )
+                with open(pdf_file_path, "wb") as f:
+                    f.write(html.write_pdf())
+                print(f"New reference PDF saved: {pdf_file_path}")
+
         if request.headers.get("X-Request-Id"):
             to_log["request_id"] = request.headers.get("X-Request-Id")
 
